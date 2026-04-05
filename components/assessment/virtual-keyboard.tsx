@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Delete, Space, CornerDownLeft } from "lucide-react"
+import { Delete } from "lucide-react"
 
 interface VirtualKeyboardProps {
   onKeyPress: (key: string) => void
@@ -24,9 +24,15 @@ const dateKeys = [
 ]
 
 const months = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+  'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
 ]
+
+const monthsFull: Record<string, string> = {
+  'Jan': 'Janeiro', 'Fev': 'Fevereiro', 'Mar': 'Março', 'Abr': 'Abril',
+  'Mai': 'Maio', 'Jun': 'Junho', 'Jul': 'Julho', 'Ago': 'Agosto',
+  'Set': 'Setembro', 'Out': 'Outubro', 'Nov': 'Novembro', 'Dez': 'Dezembro'
+}
 
 export function VirtualKeyboard({ 
   onKeyPress, 
@@ -35,25 +41,75 @@ export function VirtualKeyboard({
   type = 'text',
   className 
 }: VirtualKeyboardProps) {
-  const keys = type === 'text' ? textKeys : dateKeys
+  if (type === 'text') {
+    return (
+      <div className={cn("flex flex-col h-full", className)}>
+        {/* Teclado QWERTY maximizado */}
+        <div className="flex-1 flex flex-col gap-1.5">
+          {textKeys.map((row, rowIndex) => (
+            <div key={rowIndex} className="flex-1 flex justify-center gap-1">
+              {row.map((key) => (
+                <Button
+                  key={key}
+                  type="button"
+                  variant="outline"
+                  className="flex-1 max-w-[10%] h-full text-xl md:text-2xl font-bold transition-all hover:bg-primary hover:text-primary-foreground active:scale-95 shadow-sm"
+                  onClick={() => onKeyPress(key)}
+                >
+                  {key}
+                </Button>
+              ))}
+            </div>
+          ))}
+          
+          {/* Linha de teclas especiais */}
+          <div className="flex-1 flex justify-center gap-1">
+            <Button
+              type="button"
+              variant="destructive"
+              className="flex-[2] h-full text-lg font-bold transition-all active:scale-95 shadow-sm"
+              onClick={onBackspace}
+            >
+              <Delete className="h-6 w-6 mr-2" />
+              Apagar
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              className="flex-[4] h-full text-lg font-bold transition-all active:scale-95 shadow-sm"
+              onClick={() => onKeyPress(' ')}
+            >
+              ESPAÇO
+            </Button>
+            {onClear && (
+              <Button
+                type="button"
+                variant="outline"
+                className="flex-[2] h-full text-lg font-bold transition-all active:scale-95 shadow-sm border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+                onClick={onClear}
+              >
+                Limpar
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
 
+  // Teclado numérico para data
   return (
-    <div className={cn("space-y-3", className)}>
-      {/* Teclado principal */}
-      <div className="space-y-2">
-        {keys.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex justify-center gap-1">
+    <div className={cn("flex flex-col h-full gap-2", className)}>
+      {/* Números */}
+      <div className="flex-[2] flex flex-col gap-1.5">
+        {dateKeys.map((row, rowIndex) => (
+          <div key={rowIndex} className="flex-1 flex justify-center gap-1.5">
             {row.map((key) => (
               <Button
                 key={key}
                 type="button"
                 variant="outline"
-                className={cn(
-                  "font-semibold transition-all hover:scale-105 active:scale-95",
-                  type === 'text' 
-                    ? "h-12 w-10 md:h-14 md:w-12 text-lg" 
-                    : "h-14 w-14 md:h-16 md:w-16 text-2xl"
-                )}
+                className="flex-1 h-full text-3xl md:text-4xl font-bold transition-all hover:bg-primary hover:text-primary-foreground active:scale-95 shadow-sm"
                 onClick={() => onKeyPress(key)}
               >
                 {key}
@@ -63,91 +119,51 @@ export function VirtualKeyboard({
         ))}
       </div>
 
-      {/* Teclas especiais para texto */}
-      {type === 'text' && (
-        <div className="flex justify-center gap-2">
+      {/* Meses em grid compacto */}
+      <div className="flex-[1.5] grid grid-cols-6 gap-1">
+        {months.map((month) => (
           <Button
+            key={month}
             type="button"
-            variant="outline"
-            className="h-12 px-6 md:h-14 md:px-8 font-semibold"
-            onClick={onBackspace}
+            variant="secondary"
+            className="h-full text-sm md:text-base font-bold transition-all active:scale-95 shadow-sm"
+            onClick={() => onKeyPress(monthsFull[month])}
           >
-            <Delete className="h-5 w-5 mr-2" />
-            Apagar
+            {month}
           </Button>
-          <Button
-            type="button"
-            variant="outline"
-            className="h-12 px-8 md:h-14 md:px-12 font-semibold"
-            onClick={() => onKeyPress(' ')}
-          >
-            <Space className="h-5 w-5 mr-2" />
-            Espaço
-          </Button>
-          {onClear && (
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 px-6 md:h-14 md:px-8 font-semibold text-destructive hover:text-destructive"
-              onClick={onClear}
-            >
-              Limpar
-            </Button>
-          )}
-        </div>
-      )}
+        ))}
+      </div>
 
-      {/* Seletor de meses e teclas especiais para data */}
-      {type === 'date' && (
-        <>
-          <div className="flex justify-center gap-2 flex-wrap">
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 px-4 md:h-14 md:px-6 font-semibold"
-              onClick={() => onKeyPress(' de ')}
-            >
-              de
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 px-6 md:h-14 md:px-8 font-semibold"
-              onClick={onBackspace}
-            >
-              <Delete className="h-5 w-5 mr-2" />
-              Apagar
-            </Button>
-            {onClear && (
-              <Button
-                type="button"
-                variant="outline"
-                className="h-12 px-6 md:h-14 md:px-8 font-semibold text-destructive hover:text-destructive"
-                onClick={onClear}
-              >
-                Limpar
-              </Button>
-            )}
-          </div>
-          
-          <div className="pt-2 border-t">
-            <p className="text-sm text-muted-foreground text-center mb-2">Selecione o mês:</p>
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
-              {months.map((month) => (
-                <Button
-                  key={month}
-                  type="button"
-                  variant="secondary"
-                  className="h-10 text-sm font-medium"
-                  onClick={() => onKeyPress(month)}
-                >
-                  {month}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </>
-      )}
+      {/* Teclas especiais */}
+      <div className="flex-1 flex gap-1.5">
+        <Button
+          type="button"
+          variant="outline"
+          className="flex-1 h-full text-xl font-bold transition-all active:scale-95 shadow-sm"
+          onClick={() => onKeyPress(' de ')}
+        >
+          de
+        </Button>
+        <Button
+          type="button"
+          variant="destructive"
+          className="flex-[2] h-full text-lg font-bold transition-all active:scale-95 shadow-sm"
+          onClick={onBackspace}
+        >
+          <Delete className="h-6 w-6 mr-2" />
+          Apagar
+        </Button>
+        {onClear && (
+          <Button
+            type="button"
+            variant="outline"
+            className="flex-1 h-full text-lg font-bold transition-all active:scale-95 shadow-sm border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+            onClick={onClear}
+          >
+            Limpar
+          </Button>
+        )}
+      </div>
     </div>
   )
 }

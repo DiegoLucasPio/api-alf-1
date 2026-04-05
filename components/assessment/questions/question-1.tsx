@@ -48,7 +48,6 @@ export function Question1() {
     }
   }
 
-  // Focar no input correto quando mudar de tela
   useEffect(() => {
     if (subScreen === 1 && nameInputRef.current) {
       nameInputRef.current.focus()
@@ -60,110 +59,120 @@ export function Question1() {
   // Sub-tela 1: Nome
   if (subScreen === 1) {
     return (
-      <Card className="w-full max-w-2xl mx-auto">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            Questão 1 - Meu Nome
-          </CardTitle>
-          <CardDescription>
-            Passo 1 de 2: Escreva seu nome completo
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="nome" className="text-lg font-medium">
-              1 - Escreva o seu nome completo:
-            </Label>
-            <Input
-              ref={nameInputRef}
-              id="nome"
-              placeholder="Digite seu nome completo aqui..."
-              value={answers.nome || ''}
-              onChange={(e) => handleChange('nome', e.target.value)}
-              className="text-xl h-14 font-medium"
-              readOnly
-            />
-          </div>
+      <div className="h-[calc(100vh-12rem)] flex flex-col">
+        <Card className="flex-1 flex flex-col">
+          <CardHeader className="pb-2 shrink-0">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              Questao 1 - Meu Nome
+            </CardTitle>
+            <CardDescription>
+              Passo 1 de 2: Escreva seu nome completo
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex-1 flex flex-col gap-3 pb-4">
+            <div className="space-y-1 shrink-0">
+              <Label htmlFor="nome" className="text-base font-medium">
+                1 - Escreva o seu nome completo:
+              </Label>
+              <Input
+                ref={nameInputRef}
+                id="nome"
+                placeholder="Digite seu nome completo aqui..."
+                value={answers.nome || ''}
+                onChange={(e) => handleChange('nome', e.target.value)}
+                className="text-2xl h-14 font-semibold"
+                readOnly
+              />
+            </div>
 
-          <VirtualKeyboard
-            type="text"
-            onKeyPress={handleKeyPress}
-            onBackspace={handleBackspace}
-            onClear={handleClear}
-          />
+            <div className="flex-1 min-h-0">
+              <VirtualKeyboard
+                type="text"
+                onKeyPress={handleKeyPress}
+                onBackspace={handleBackspace}
+                onClear={handleClear}
+                className="h-full"
+              />
+            </div>
 
-          <div className="flex justify-end pt-4 border-t">
-            <Button 
-              onClick={() => setSubScreen(2)}
-              className="gap-2"
-              size="lg"
-            >
-              Continuar
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+            <div className="flex justify-end shrink-0 pt-2 border-t">
+              <Button 
+                onClick={() => setSubScreen(2)}
+                className="gap-2 h-12 px-6 text-lg"
+                size="lg"
+              >
+                Continuar
+                <ArrowRight className="h-5 w-5" />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     )
   }
 
   // Sub-tela 2: Data de Nascimento
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          Questão 1 - Data de Nascimento
-        </CardTitle>
-        <CardDescription>
-          Passo 2 de 2: Escreva sua data de nascimento
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {answers.nome && (
-          <div className="p-3 bg-muted rounded-lg">
-            <p className="text-sm text-muted-foreground">Nome informado:</p>
-            <p className="font-medium text-lg">{answers.nome}</p>
+    <div className="h-[calc(100vh-12rem)] flex flex-col">
+      <Card className="flex-1 flex flex-col">
+        <CardHeader className="pb-2 shrink-0">
+          <CardTitle className="flex items-center gap-2 text-lg">
+            Questao 1 - Data de Nascimento
+          </CardTitle>
+          <CardDescription>
+            Passo 2 de 2: Escreva sua data de nascimento
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex-1 flex flex-col gap-3 pb-4">
+          {answers.nome && (
+            <div className="p-2 bg-muted rounded-lg shrink-0">
+              <p className="text-xs text-muted-foreground">Nome informado:</p>
+              <p className="font-semibold">{answers.nome}</p>
+            </div>
+          )}
+
+          <div className="space-y-1 shrink-0">
+            <Label htmlFor="nascimento" className="text-base font-medium">
+              Escreva dia, mes e ano do seu nascimento:
+            </Label>
+            <Input
+              ref={dateInputRef}
+              id="nascimento"
+              placeholder="Ex: 15 de marco de 2015"
+              value={answers.nascimento || ''}
+              onChange={(e) => handleChange('nascimento', e.target.value)}
+              className="text-2xl h-14 font-semibold"
+              readOnly
+            />
           </div>
-        )}
 
-        <div className="space-y-2">
-          <Label htmlFor="nascimento" className="text-lg font-medium">
-            Escreva dia, mês e ano do seu nascimento:
-          </Label>
-          <Input
-            ref={dateInputRef}
-            id="nascimento"
-            placeholder="Ex: 15 de março de 2015"
-            value={answers.nascimento || ''}
-            onChange={(e) => handleChange('nascimento', e.target.value)}
-            className="text-xl h-14 font-medium"
-            readOnly
-          />
-        </div>
-
-        <VirtualKeyboard
-          type="date"
-          onKeyPress={handleKeyPress}
-          onBackspace={handleBackspace}
-          onClear={handleClear}
-        />
-
-        <div className="flex justify-between pt-4 border-t">
-          <Button 
-            variant="outline"
-            onClick={() => setSubScreen(1)}
-            className="gap-2"
-            size="lg"
-          >
-            <ArrowLeft className="h-5 w-5" />
-            Voltar
-          </Button>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Check className="h-4 w-4 text-green-500" />
-            Questão completa
+          <div className="flex-1 min-h-0">
+            <VirtualKeyboard
+              type="date"
+              onKeyPress={handleKeyPress}
+              onBackspace={handleBackspace}
+              onClear={handleClear}
+              className="h-full"
+            />
           </div>
-        </div>
-      </CardContent>
-    </Card>
+
+          <div className="flex justify-between shrink-0 pt-2 border-t">
+            <Button 
+              variant="outline"
+              onClick={() => setSubScreen(1)}
+              className="gap-2 h-12 px-6 text-lg"
+              size="lg"
+            >
+              <ArrowLeft className="h-5 w-5" />
+              Voltar
+            </Button>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Check className="h-5 w-5 text-green-500" />
+              Questao completa
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
