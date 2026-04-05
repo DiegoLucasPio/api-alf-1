@@ -50,7 +50,7 @@ export function Report({ onBack }: ReportProps) {
         </Button>
       </div>
 
-      {{/* Informações do Aluno - Editáveis */}
+      {/* Informações do Aluno - Editáveis */}
       <Card className="print:hidden">
         <CardHeader>
           <CardTitle>Informações do Aluno</CardTitle>
