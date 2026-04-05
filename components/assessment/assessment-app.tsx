@@ -4,7 +4,6 @@ import { useState } from "react"
 import { AssessmentProvider, useAssessment } from "@/lib/assessment-context"
 import { questions } from "@/lib/questions"
 import { Header } from "./header"
-import { StudentInfo } from "./student-info"
 import { QuestionCard } from "./question-card"
 import { QuestionRenderer } from "./question-renderer"
 import { Navigation } from "./navigation"
@@ -74,8 +73,6 @@ function AssessmentContent() {
       <Header onReset={() => setShowResetDialog(true)} onShowReport={() => setShowReport(true)} />
       
       <main className="container mx-auto px-4 py-6">
-        <StudentInfo />
-
         {state.currentQuestion === 0 ? (
           <div className="space-y-8">
             {/* Português */}

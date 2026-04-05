@@ -1,8 +1,10 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { useAssessment } from "@/lib/assessment-context"
 import { questions } from "@/lib/questions"
 import { ArrowLeft, Printer } from "lucide-react"
@@ -12,7 +14,7 @@ interface ReportProps {
 }
 
 export function Report({ onBack }: ReportProps) {
-  const { state, getProgress } = useAssessment()
+  const { state, getProgress, setStudentInfo } = useAssessment()
   const { answered, total, percentage } = getProgress()
 
   const formatAnswer = (answer: string | string[] | Record<string, string> | undefined) => {
@@ -48,7 +50,59 @@ export function Report({ onBack }: ReportProps) {
         </Button>
       </div>
 
-      {/* Cabeçalho do Relatório */}
+      {{/* Informações do Aluno - Editáveis */}
+      <Card className="print:hidden">
+        <CardHeader>
+          <CardTitle>Informações do Aluno</CardTitle>
+          <CardDescription>
+            Preencha os dados do aluno para o relatório
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="schoolName">Unidade Escolar:</Label>
+              <Input
+                id="schoolName"
+                placeholder="Nome da escola..."
+                value={state.schoolName}
+                onChange={(e) => setStudentInfo({ schoolName: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="teacherName">Prof.(a) do AEE:</Label>
+              <Input
+                id="teacherName"
+                placeholder="Nome do professor(a)..."
+                value={state.teacherName}
+                onChange={(e) => setStudentInfo({ teacherName: e.target.value })}
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="studentName">Nome do Aluno:</Label>
+              <Input
+                id="studentName"
+                placeholder="Nome completo do aluno..."
+                value={state.studentName}
+                onChange={(e) => setStudentInfo({ studentName: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="date">Data:</Label>
+              <Input
+                id="date"
+                type="date"
+                value={state.date}
+                onChange={(e) => setStudentInfo({ date: e.target.value })}
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Cabeçalho do Relatório - Visível na impressão */}
       <Card className="print:shadow-none print:border-2">
         <CardHeader className="text-center">
           <div className="text-sm text-muted-foreground mb-2">
