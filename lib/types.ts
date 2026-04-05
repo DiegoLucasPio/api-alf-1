@@ -1,8 +1,13 @@
+export type IconName = 
+  | 'pencil' | 'shirt' | 'music' | 'droplets' | 'image' | 'file-text'
+  | 'calendar' | 'box' | 'plus' | 'hash' | 'calculator' | 'clock'
+  | 'bar-chart' | 'wallet' | 'hand' | 'dice' | 'pizza'
+
 export interface Question {
   id: number
   title: string
   subtitle?: string
-  icon?: string
+  icon?: IconName
   type: 'text' | 'multi-text' | 'multiple-choice' | 'calendar' | 'matching' | 'math' | 'drawing' | 'textarea' | 'graph' | 'money' | 'fraction' | 'probability'
   subject: 'portugues' | 'matematica'
 }

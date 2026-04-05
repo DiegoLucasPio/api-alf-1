@@ -5,7 +5,7 @@ export const questions: Question[] = [
     id: 1,
     title: "Meu Nome",
     subtitle: "Escreva seu nome completo e data de nascimento",
-    icon: "✏️",
+    icon: "pencil",
     type: "multi-text",
     subject: "portugues"
   },
@@ -13,7 +13,7 @@ export const questions: Question[] = [
     id: 2,
     title: "Vestuário",
     subtitle: "Escreva o nome das peças do vestuário",
-    icon: "👕",
+    icon: "shirt",
     type: "multi-text",
     subject: "portugues"
   },
@@ -21,7 +21,7 @@ export const questions: Question[] = [
     id: 3,
     title: "A Bailarina",
     subtitle: "Leia o poema e responda",
-    icon: "💃",
+    icon: "music",
     type: "text",
     subject: "portugues"
   },
@@ -29,7 +29,7 @@ export const questions: Question[] = [
     id: 4,
     title: "Ciclo da Água",
     subtitle: "Nomeie os processos do ciclo da água",
-    icon: "💧",
+    icon: "droplets",
     type: "matching",
     subject: "portugues"
   },
@@ -37,7 +37,7 @@ export const questions: Question[] = [
     id: 5,
     title: "Tirinha",
     subtitle: "Interprete a tirinha",
-    icon: "🖼️",
+    icon: "image",
     type: "textarea",
     subject: "portugues"
   },
@@ -45,7 +45,7 @@ export const questions: Question[] = [
     id: 6,
     title: "Reescrita",
     subtitle: "Reescreva a fábula com suas palavras",
-    icon: "📝",
+    icon: "file-text",
     type: "textarea",
     subject: "portugues"
   },
@@ -53,7 +53,7 @@ export const questions: Question[] = [
     id: 7,
     title: "Calendário",
     subtitle: "Observe o calendário e responda",
-    icon: "📅",
+    icon: "calendar",
     type: "calendar",
     subject: "matematica"
   },
@@ -61,7 +61,7 @@ export const questions: Question[] = [
     id: 8,
     title: "Sólidos Geométricos",
     subtitle: "Relacione as figuras aos sólidos",
-    icon: "🔷",
+    icon: "box",
     type: "matching",
     subject: "matematica"
   },
@@ -69,7 +69,7 @@ export const questions: Question[] = [
     id: 9,
     title: "Operações",
     subtitle: "Resolva as operações matemáticas",
-    icon: "➕",
+    icon: "plus",
     type: "math",
     subject: "matematica"
   },
@@ -77,7 +77,7 @@ export const questions: Question[] = [
     id: 10,
     title: "Número Escondido",
     subtitle: "Descubra os números escondidos",
-    icon: "🔢",
+    icon: "hash",
     type: "math",
     subject: "matematica"
   },
@@ -85,7 +85,7 @@ export const questions: Question[] = [
     id: 11,
     title: "Problemas",
     subtitle: "Resolva as situações problema",
-    icon: "🧮",
+    icon: "calculator",
     type: "math",
     subject: "matematica"
   },
@@ -93,7 +93,7 @@ export const questions: Question[] = [
     id: 12,
     title: "Horas",
     subtitle: "Relacione os acontecimentos com as horas",
-    icon: "🕐",
+    icon: "clock",
     type: "matching",
     subject: "matematica"
   },
@@ -101,7 +101,7 @@ export const questions: Question[] = [
     id: 13,
     title: "Gráfico",
     subtitle: "Analise a pesquisa de brinquedos",
-    icon: "📊",
+    icon: "bar-chart",
     type: "graph",
     subject: "matematica"
   },
@@ -109,7 +109,7 @@ export const questions: Question[] = [
     id: 14,
     title: "Dinheiro",
     subtitle: "Observe as quantias e responda",
-    icon: "💰",
+    icon: "wallet",
     type: "money",
     subject: "matematica"
   },
@@ -117,7 +117,7 @@ export const questions: Question[] = [
     id: 15,
     title: "Direita e Esquerda",
     subtitle: "Identifique o que Mariana segura",
-    icon: "👐",
+    icon: "hand",
     type: "text",
     subject: "matematica"
   },
@@ -125,7 +125,7 @@ export const questions: Question[] = [
     id: 16,
     title: "Probabilidade",
     subtitle: "Qual a chance de pegar uma bolinha vermelha?",
-    icon: "🎲",
+    icon: "dice",
     type: "probability",
     subject: "matematica"
   },
@@ -133,7 +133,7 @@ export const questions: Question[] = [
     id: 17,
     title: "Frações",
     subtitle: "Marque a fração correta para cada imagem",
-    icon: "🍕",
+    icon: "pizza",
     type: "fraction",
     subject: "matematica"
   }

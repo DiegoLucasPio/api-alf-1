@@ -2,8 +2,33 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Question } from "@/lib/types"
+import { Question, IconName } from "@/lib/types"
 import { cn } from "@/lib/utils"
+import { 
+  Pencil, Shirt, Music, Droplets, Image, FileText,
+  Calendar, Box, Plus, Hash, Calculator, Clock,
+  BarChart, Wallet, Hand, Dice5, Pizza
+} from "lucide-react"
+
+const iconMap: Record<IconName, React.ElementType> = {
+  'pencil': Pencil,
+  'shirt': Shirt,
+  'music': Music,
+  'droplets': Droplets,
+  'image': Image,
+  'file-text': FileText,
+  'calendar': Calendar,
+  'box': Box,
+  'plus': Plus,
+  'hash': Hash,
+  'calculator': Calculator,
+  'clock': Clock,
+  'bar-chart': BarChart,
+  'wallet': Wallet,
+  'hand': Hand,
+  'dice': Dice5,
+  'pizza': Pizza,
+}
 
 interface QuestionCardProps {
   question: Question
@@ -13,6 +38,8 @@ interface QuestionCardProps {
 }
 
 export function QuestionCard({ question, isActive, isAnswered, onClick }: QuestionCardProps) {
+  const IconComponent = question.icon ? iconMap[question.icon] : Pencil
+
   return (
     <Card 
       className={cn(
@@ -24,7 +51,7 @@ export function QuestionCard({ question, isActive, isAnswered, onClick }: Questi
     >
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <span className="text-2xl">{question.icon}</span>
+          <IconComponent className="h-6 w-6 text-primary" />
           <Badge variant={question.subject === 'portugues' ? 'default' : 'secondary'}>
             {question.subject === 'portugues' ? 'Português' : 'Matemática'}
           </Badge>
