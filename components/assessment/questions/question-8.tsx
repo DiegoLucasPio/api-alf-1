@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { useAssessment } from "@/lib/assessment-context"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
@@ -26,7 +25,7 @@ const SOLIDOS = [
 ]
 
 export function Question8() {
-  const { state, setAnswer, setObservation } = useAssessment()
+  const { state, setAnswer } = useAssessment()
   const answers = (state.answers[8] as Record<string, string>) || {}
   const [selectedObject, setSelectedObject] = useState<string | null>(null)
 
@@ -111,16 +110,7 @@ export function Question8() {
           </div>
         )}
 
-        <div className="pt-4 border-t space-y-2">
-          <Label htmlFor="obs8" className="text-muted-foreground">Observações do Professor(a):</Label>
-          <Textarea
-            id="obs8"
-            placeholder="Adicione observações sobre o desempenho do aluno..."
-            value={state.observations[8] || ''}
-            onChange={(e) => setObservation(8, e.target.value)}
-            rows={3}
-          />
-        </div>
+        
       </CardContent>
     </Card>
   )

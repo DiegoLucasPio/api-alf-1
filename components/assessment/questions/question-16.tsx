@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useAssessment } from "@/lib/assessment-context"
 
@@ -14,7 +13,7 @@ const OPCOES = [
 ]
 
 export function Question16() {
-  const { state, setAnswer, setObservation } = useAssessment()
+  const { state, setAnswer } = useAssessment()
   const answer = (state.answers[16] as string) || ''
 
   return (
@@ -76,16 +75,7 @@ export function Question16() {
           ))}
         </RadioGroup>
 
-        <div className="pt-4 border-t space-y-2">
-          <Label htmlFor="obs16" className="text-muted-foreground">Observações do Professor(a):</Label>
-          <Textarea
-            id="obs16"
-            placeholder="Adicione observações sobre o desempenho do aluno..."
-            value={state.observations[16] || ''}
-            onChange={(e) => setObservation(16, e.target.value)}
-            rows={3}
-          />
-        </div>
+        
       </CardContent>
     </Card>
   )

@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useAssessment } from "@/lib/assessment-context"
 
@@ -60,7 +59,7 @@ const FRACOES = [
 ]
 
 export function Question17() {
-  const { state, setAnswer, setObservation } = useAssessment()
+  const { state, setAnswer } = useAssessment()
   const answers = (state.answers[17] as Record<string, string>) || {}
 
   const handleChange = (fracaoId: string, value: string) => {
@@ -113,16 +112,7 @@ export function Question17() {
           </div>
         ))}
 
-        <div className="pt-4 border-t space-y-2">
-          <Label htmlFor="obs17" className="text-muted-foreground">Observações do Professor(a):</Label>
-          <Textarea
-            id="obs17"
-            placeholder="Adicione observações sobre o desempenho do aluno..."
-            value={state.observations[17] || ''}
-            onChange={(e) => setObservation(17, e.target.value)}
-            rows={3}
-          />
-        </div>
+        
       </CardContent>
     </Card>
   )

@@ -36,7 +36,7 @@ E TAMBÉM QUER DORMIR COMO AS OUTRAS CRIANÇAS.
 CECÍLIA MEIRELES`
 
 export function Question3() {
-  const { state, setAnswer, setObservation } = useAssessment()
+  const { state, setAnswer } = useAssessment()
   const answers = (state.answers[3] as Record<string, string>) || {}
 
   const handleChange = (field: string, value: string) => {
@@ -103,16 +103,7 @@ export function Question3() {
           </div>
         </div>
 
-        <div className="pt-4 border-t space-y-2">
-          <Label htmlFor="obs3" className="text-muted-foreground">Observações do Professor(a):</Label>
-          <Textarea
-            id="obs3"
-            placeholder="Adicione observações sobre o desempenho do aluno..."
-            value={state.observations[3] || ''}
-            onChange={(e) => setObservation(3, e.target.value)}
-            rows={3}
-          />
-        </div>
+        
       </CardContent>
     </Card>
   )

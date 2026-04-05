@@ -3,7 +3,6 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { useAssessment } from "@/lib/assessment-context"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
@@ -19,7 +18,7 @@ const ABRIL_2024 = [
 const DIAS_SEMANA = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB']
 
 export function Question7() {
-  const { state, setAnswer, setObservation } = useAssessment()
+  const { state, setAnswer } = useAssessment()
   const answers = (state.answers[7] as Record<string, string>) || {}
   const [selectedDays, setSelectedDays] = useState<Record<string, boolean>>({
     segundoDomingo: false,
@@ -137,16 +136,7 @@ export function Question7() {
           </div>
         </div>
 
-        <div className="pt-4 border-t space-y-2">
-          <Label htmlFor="obs7" className="text-muted-foreground">Observações do Professor(a):</Label>
-          <Textarea
-            id="obs7"
-            placeholder="Adicione observações sobre o desempenho do aluno..."
-            value={state.observations[7] || ''}
-            onChange={(e) => setObservation(7, e.target.value)}
-            rows={3}
-          />
-        </div>
+        
       </CardContent>
     </Card>
   )

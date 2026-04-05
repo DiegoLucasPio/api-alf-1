@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useAssessment } from "@/lib/assessment-context"
 
 export function Question6() {
-  const { state, setAnswer, setObservation } = useAssessment()
+  const { state, setAnswer } = useAssessment()
   const answer = (state.answers[6] as string) || ''
 
   return (
@@ -52,16 +52,7 @@ export function Question6() {
           />
         </div>
 
-        <div className="pt-4 border-t space-y-2">
-          <Label htmlFor="obs6" className="text-muted-foreground">Observações do Professor(a):</Label>
-          <Textarea
-            id="obs6"
-            placeholder="Adicione observações sobre o desempenho do aluno..."
-            value={state.observations[6] || ''}
-            onChange={(e) => setObservation(6, e.target.value)}
-            rows={3}
-          />
-        </div>
+        
       </CardContent>
     </Card>
   )

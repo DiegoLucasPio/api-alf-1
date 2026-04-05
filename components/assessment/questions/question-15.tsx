@@ -3,11 +3,10 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { useAssessment } from "@/lib/assessment-context"
 
 export function Question15() {
-  const { state, setAnswer, setObservation } = useAssessment()
+  const { state, setAnswer } = useAssessment()
   const answers = (state.answers[15] as Record<string, string>) || {}
 
   const handleChange = (field: string, value: string) => {
@@ -82,16 +81,7 @@ export function Question15() {
           </div>
         </div>
 
-        <div className="pt-4 border-t space-y-2">
-          <Label htmlFor="obs15" className="text-muted-foreground">Observações do Professor(a):</Label>
-          <Textarea
-            id="obs15"
-            placeholder="Adicione observações sobre o desempenho do aluno..."
-            value={state.observations[15] || ''}
-            onChange={(e) => setObservation(15, e.target.value)}
-            rows={3}
-          />
-        </div>
+        
       </CardContent>
     </Card>
   )
